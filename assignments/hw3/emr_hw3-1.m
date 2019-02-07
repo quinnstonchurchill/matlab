@@ -1,4 +1,4 @@
-clc; clear all;
+clear;clc;
 guess = input('Enter a value to check: ');
 
 % don't allow negative numbers

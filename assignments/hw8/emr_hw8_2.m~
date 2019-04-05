@@ -1,0 +1,48 @@
+% Image puzzles
+clear;clc;close all;
+% filename = input('Enter image name: \n', 's');
+filename = 'Cool_Puzzle.png';
+jumbledImage = imread(filename);
+
+figure(1)
+imshow(jumbledImage)
+
+% get image dimensions
+[height, width, color] = size(jumbledImage);
+
+image = uint8(zeros(height, width, color));
+
+% edit rows (y axis)
+for rows = 1:height
+    rowAndColor = jumbledImage(rows, :, :);
+    if mod(rows, 2) == 0
+        newRow = rows / 2;
+    else
+        newRow = (rows + 1) / 2 + height / 2;
+    end
+    image(newRow, :, :) = rowAndColor;
+end
+
+%% edit cols (x axis)
+for cols = 1:width
+    colAndColor = jumbledImage(:, cols, :);
+    % col in left half
+    if cols < width / 2
+        newCol = width / 2 + 1 - cols;
+    else
+        newCol = 3 * width / 2 + 1 - cols;
+    end
+    image(:, newCol, :) = colAndColor;
+end
+
+%% fix colors
+image(:,:,1) = image(:,:,1) * 3; % red
+image(:,:,3) = image(:,:,1) * 3; % blue
+image(:,:,2) = 0; % green
+
+%% rearrange image
+
+
+%% display image
+figure(2)
+imshow(image)

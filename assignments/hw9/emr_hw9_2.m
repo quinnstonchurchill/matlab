@@ -1,11 +1,23 @@
 % Swap vowels
-% [a e i o u] = [97 101 105 111 117]
-word = 'programming';
-% word = input('Enter the word: ', 's');
+clear;
+word = input('Enter the word: ', 's');
+vowels = 'aeiou';
+wordVowels = [];
 
 % make array of vowels
-for i in length(word)
-  % if letter is vowel
-    % add to array
+for w = 1:length(word)
+    for v = 1:length(vowels)
+        if word(w) == vowels(v)
+            wordVowels = [wordVowels word(w)];
+        end
+    end
 end
 
+wordVowels = flip(wordVowels);
+vowelIndices = regexp(word, '[aeiou]');
+
+for i = 1:length(vowelIndices)
+    word(vowelIndices(i)) = wordVowels(i);
+end
+
+fprintf('The new word is: %s \n', word);
